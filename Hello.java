@@ -1,71 +1,67 @@
-class Point{
-    int x;
-    String y;
+import java.util.Date;
+import java.util.Objects;
 
-    public Point(int x, String y) {
-        this.x = x;
-        this.y = y;
+class Person{
+    private String firstName;
+    private String lastName;
+    private int age;
+    private Date lastModifiedDate;
+
+    public Person(String firstName, String lastName, int age, Date lastModifiedDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.lastModifiedDate = lastModifiedDate;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + x;
-        result = prime * result + ((y == null) ? 0 : y.hashCode());
-        return result;
+    public String getFirstName() {
+        return firstName;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+    public void setLastModifiedDate(Date lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+    /* write equals */
+    public boolean equals(Object o){
+        if(o == this){
             return true;
-        if (obj == null)
+        }
+        if(o == null || this.getClass() != o.getClass()){
             return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Point other = (Point) obj;
-        if (x != other.x)
-            return false;
-        if (y == null) {
-            if (other.y != null)
-                return false;
-        } else if (!y.equals(other.y))
-            return false;
-        return true;
+        }
+        Person other = (Person) o;
+        return 
+            this.age == other.age
+            && Objects.equals(this.firstName, other.firstName)
+            && Objects.equals(this.lastName, other.lastName);
+    }
+    /* write hashCode */
+    public int hashCode(){
+        return Objects.hash(firstName, lastName, age);
     }
 }
 class Hello{
     public static void main(String[] args) {
-        /* Reflexivity */
-        Point p1 = new Point(1,"2");
-        System.out.println(p1.equals(p1));      //true
-
-        /* Symmetry */
-        Point p1 = new Point(1,"2");
-        Point p2 = new Point(1,"2");
-        System.out.println(p1.equals(p2));      //true
-        System.out.println(p2.equals(p1));      //true
-
-        /* Transitivity */
-        Point p1 = new Point(1, "2");
-        Point p2 = new Point(1, "2");
-        Point p3 = new Point(1, "2");
-        System.out.println(p1.equals(p2));      //true
-        System.out.println(p2.equals(p3));      //true
-        System.out.println(p1.equals(p3));      //true
-
-        /* Consistency */
-        Point p1 = new Point(1, "2");
-        Point p2 = new Point(1, "2");
-        System.out.println(p1.equals(p2));      //true
-        p1.x = 3;
-        System.out.println(p1.equals(p2));      //changing value should return false
-        p1.x = 1;
-        System.out.println(p1.equals(p2));      //assign back to same value before should return true
-
-        /* Non-nullity */
-        Point p1 = new Point(1, "2");
-        System.out.println(p1.equals(null));    //false
+        Person p1 = new Person("Foo", "Bar", 25, new Date());
+        Person p2 = new Person("Foo", "Bar", 25, new Date());
+        System.out.println(p1.equals(p2));
+        System.out.println(p1.hashCode() == p2.hashCode());
     }
 }
