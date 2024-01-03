@@ -1,22 +1,17 @@
+import java.time.LocalDateTime;
+import java.util.NavigableSet;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 class Hello{
     public static void main(String[] args) {
-        SortedSet<String> vocab = new TreeSet<>();
-        vocab.add("mango");
-        vocab.add("banana");
-        vocab.add("pineapple");
-        vocab.add("apple");
+        NavigableSet<LocalDateTime> appointments = new TreeSet<>();
+        appointments.add(LocalDateTime.of(2023, 3,4,10,30));
+        appointments.add(LocalDateTime.of(2023, 3,4,11,0));
+        appointments.add(LocalDateTime.of(2023, 3,4,11,30));
+        appointments.add(LocalDateTime.of(2023, 3,4,12,0));
 
-        String firstWord = vocab.first();
-        String lastWord = vocab.last();
-
-        System.out.println("vocab = " + vocab);
-        System.out.println("firstWord = " + firstWord);
-        System.out.println("lastWord = " + lastWord);
-
-        System.out.println(vocab.headSet("mango"));
-        System.out.println(vocab.tailSet("mango"));
+        LocalDateTime nextAppt = appointments.ceiling(LocalDateTime.of(2023, 3, 4, 10, 45));
+        System.out.println("next appointment = " + nextAppt);
     }
 }
