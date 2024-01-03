@@ -1,17 +1,100 @@
-import java.time.LocalDateTime;
-import java.util.NavigableSet;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.HashMap;
+import java.util.Map;
 
+class Key{
+    private int id;
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Key other = (Key) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Key [id=" + id + "]";
+    }
+
+    public Key(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+}
+class Value{
+    private String data;
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((data == null) ? 0 : data.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Value other = (Value) obj;
+        if (data == null) {
+            if (other.data != null)
+                return false;
+        } else if (!data.equals(other.data))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Value [data=" + data + "]";
+    }
+
+    public Value(String data) {
+        this.data = data;
+    }
+
+    public String getData() {
+        return data;
+    }
+    public void setData(String data) {
+        this.data = data;
+    }
+}
 class Hello{
     public static void main(String[] args) {
-        NavigableSet<LocalDateTime> appointments = new TreeSet<>();
-        appointments.add(LocalDateTime.of(2023, 3,4,10,30));
-        appointments.add(LocalDateTime.of(2023, 3,4,11,0));
-        appointments.add(LocalDateTime.of(2023, 3,4,11,30));
-        appointments.add(LocalDateTime.of(2023, 3,4,12,0));
+        Map<Key, Value> myMap = new HashMap<>();
+        myMap.put(new Key(1), new Value("Hello"));
+        myMap.put(new Key(2), new Value("World"));
+        System.out.println("my map = " + myMap);
 
-        LocalDateTime nextAppt = appointments.ceiling(LocalDateTime.of(2023, 3, 4, 10, 45));
-        System.out.println("next appointment = " + nextAppt);
+        for(Map.Entry<Key, Value> keyValueEntry:myMap.entrySet()){
+            System.out.println("key value entry = " + keyValueEntry);
+        }
     }
 }
