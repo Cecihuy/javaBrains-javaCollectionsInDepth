@@ -1,0 +1,11 @@
+The equals contract
+* Reflexivity
+    an object should be equal to it self
+* Symmetry
+    if x is equal to y, then y should also be equal to x
+* Transitivity
+    if x is equal to y and y is equal to z, then x should also be equal to z
+* Consistency
+    should return the same result unless the state of the object has been modified
+* Non-nullity
+    an object should never be considered equal to null
