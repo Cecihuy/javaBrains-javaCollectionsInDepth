@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 class IteratorExercise{
     public Collection<String> getFruits(){
@@ -19,6 +20,12 @@ class Hello{
         
         while(iterator.hasNext()){
             String fruitStr = iterator.next();
+            try{
+                if(iterator.next().equals("banana"))                
+                    iterator.remove();
+            }catch(NoSuchElementException e){
+                System.out.println("skipCuy");
+            }
             System.out.println("fruitStr = " + fruitStr);
         }
     }
